@@ -9,10 +9,20 @@ class Earnings:
 
     def next_earnings_date(self):
 
-        API_KEY = self.api_key
-        ticker = self.ticker
-        URL = f'https://cloud.iexapis.com/stable/stock/{ticker}/estimates/1/reportDate?token={API_KEY}'
-
+        URL = f'https://cloud.iexapis.com/stable/stock/{self.ticker}/estimates/1/reportDate?token={self.api_key}'
         r = requests.get(URL)
+        return r.text
 
+
+    def earnings_today(self):
+
+        URL = f'https://cloud.iexapis.com/stable/stock/market/today-earnings?token={self.api_key}'
+        r = requests.get(URL)
+        return r.text
+
+    def earnings(self):
+
+        URL = f'https://cloud.iexapis.com/stable/stock/{self.ticker}/earnings/?token={self.api_key}'
+        #/stock/{symbol}/earnings/{last}/{field}
+        r = requests.get(URL)
         return r.text
